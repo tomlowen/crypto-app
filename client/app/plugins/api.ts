@@ -1,6 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {  
     const api = $fetch.create({
-        baseURL: useRuntimeConfig().public.apiBase,
+        baseURL: useRuntimeConfig().public.apiBase ?? 'http://127.0.0.1:8000/api/v1',
     
         async onResponseError({ response }) {
             if (response.status !== 200) {

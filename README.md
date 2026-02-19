@@ -4,21 +4,23 @@
     ```bash
     git clone https://github.com/tomlowen/crypto-app.git
     ```
+
 2. Navigate to the api directory of the project and install the dependencies:
     ```bash
     cd crypto-app/api
     composer install
     ```
 
-3. Set up crypto_app database
+3. Set up crypto_app database.
 
 4. Set up environment variables:
-    - Create a `.env` file in the root directory.
-    - Add the required variables as specified in my email.
+    - Create a `.env` file in the root directory from `.env.example.`
+    - Add a CoinGecko API key (I can provide one if necessary).
     - Add the database values.
 
 5. Run the commands to initialise the backend data and serve the app:
     ```bash
+    php artisan key:generate
     php artisan migrate
     php artisan app:sync-coin-prices
     php artisan serve
@@ -30,11 +32,7 @@
     npm install
     ```
 
-7. Set up environment variables:
-    - Create a `.env` file in the root directory.
-    - Add the required variables as specified in my email.
-
-8. run 
+7. run 
     ```bash
     npm run dev
     ```
