@@ -4,6 +4,11 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * CoinResource
+ * 
+ * @mixin \App\Models\Coin
+ */
 class CoinResource extends JsonResource
 {
     /**
@@ -16,13 +21,22 @@ class CoinResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'coingecko_id' => $this->coingecko_id,
             'name' => $this->name,
             'symbol' => $this->symbol,
-            'price' => $this->price,
+            'description' => $this->description, //TODO: make localizations available via api request
+            'image_url' => $this->image_url,
+            'current_price' => $this->current_price,
             'market_cap' => $this->market_cap,
-            'volume' => $this->volume,
-            'change' => $this->change,
-            'description' => $this->description->en, //TODO: make localizations available via api request
+            'market_cap_rank' => $this->market_cap_rank,
+            'fully_diluted_valuation' => $this->fully_diluted_valuation,
+            'total_volume' => $this->total_volume,
+            'high_24h' => $this->high_24h,
+            'low_24h' => $this->low_24h,
+            'price_change_24h' => $this->price_change_24h,
+            'price_change_percentage_24h' => $this->price_change_percentage_24h,
+            'market_cap_change_24h' => $this->market_cap_change_24h,
+            'market_cap_change_percentage_24h' => $this->market_cap_change_percentage_24h
         ];
     }
 }
