@@ -69,6 +69,10 @@ class CoinService
                     'coingecko_id' => $coinData['id']
                 ],
                 [
+                    'name' => $coinData['name'],
+                    'symbol' => $coinData['symbol'],
+                    'description' => $coinData['description']['en'] ?? '',
+                    'image_url' => $coinData['image'],
                     'current_price' => $coinData['current_price'],
                     'market_cap' => $coinData['market_cap'],
                     'market_cap_rank' => $coinData['market_cap_rank'],

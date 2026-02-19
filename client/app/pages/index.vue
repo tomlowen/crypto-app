@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import CoinTableRow from '~/components/CoinTableRow.vue';
+import { useAPI } from '~/composable/useAPI';
 import type { Coin } from '~/types/index.d.ts';
 
 //TODO: move this to a store and use it across the app
-//TODO: add error handling and loading state
-//TODO: add pagination and search functionality
+//TODO: add pagination
 //TODO: add a refresh button to update the data
-//TODO: move api logic to composable
-const res = await useFetch('http://127.0.0.1:8000/api/v1/coins');
+//TODO: add error handling and loading state
+const res = await useAPI('/coins');
 const data = res.data as Ref<{ data: Coin[] }>;
 
 const filteredData = ref(data.value.data.slice(0,10) as Coin[]);

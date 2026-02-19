@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { useAPI } from '~/composable/useAPI';
 import type { Coin } from '~/types';
 
-const res = await useFetch('http://127.0.0.1:8000/api/v1/coins/' + useRoute().params.id);
+const res = await useAPI('/coins/' + useRoute().params.id);
 const data = res.data as Ref<{ data: Coin }>;
 </script>
 
