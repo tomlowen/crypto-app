@@ -10,6 +10,22 @@ import type { Coin } from '~/types/index.d.ts';
 const res = await useFetch('http://127.0.0.1:8000/api/v1/coins');
 const data = res.data as Ref<{ data: Coin[] }>;
 
+const filteredData = ref(data.value.data.slice(0,10) as Coin[]);
+
+function handleSearch(query: string): void {
+    var results: Coin[];
+
+    if (!query) {
+        results = data.value.data;
+    } else {
+        results = data.value.data.filter(coin => 
+            coin.name.toLowerCase().includes(query.toLowerCase()) ||
+            coin.symbol.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+
+    filteredData.value = results.slice(0,10)
+}
 </script>
 
 <template>
@@ -20,9 +36,7 @@ const data = res.data as Ref<{ data: Coin[] }>;
                 <p class="text-lg text-gray-600 mb-6">
                     Track your favorite cryptocurrencies and stay updated with the latest trends.
                 </p>
-                <button class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700">
-                    Get Started
-                </button>
+                <Search @update:search="(value) => handleSearch(value)" />
             </section>
 
             <section class="mt-10">
@@ -38,7 +52,7 @@ const data = res.data as Ref<{ data: Coin[] }>;
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <CoinTableRow v-for="coin in data.data" :key="coin.id" :coin="coin" />
+                            <CoinTableRow v-for="coin in filteredData" :key="coin.id" :coin="coin" />
                         </tbody>
                     </table>
                 </div>
