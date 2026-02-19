@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const isMenuOpen = ref(false)
@@ -7,7 +7,11 @@ const navigation = [
   { name: 'Team', href: '#' },
   { name: 'Projects', href: '#' },
   { name: 'Reports', href: '#' },
-]
+];
+
+async function handleClick(): Promise<void> {
+    await navigateTo('/');
+}
 </script>
 
 <template>
@@ -17,11 +21,11 @@ const navigation = [
       <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
           
-          <div class="flex-shrink-0 flex items-center gap-2">
+          <div class="flex-shrink-0 flex items-center gap-2" @click="handleClick" style="cursor: pointer;">
             <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-xl">V</span>
+              <span class="text-white font-bold text-xl">£</span>
             </div>
-            <span class="font-bold text-xl tracking-tight">VueApp</span>
+            <span class="font-bold text-xl tracking-tight">CryptoApp</span>
           </div>
 
           <div class="hidden md:flex space-x-8">
@@ -33,7 +37,7 @@ const navigation = [
 
           <div class="hidden md:block">
             <button class="bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-indigo-700 transition-all shadow-sm">
-              Get Started
+              Login
             </button>
           </div>
 

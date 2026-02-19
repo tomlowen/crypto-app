@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import CoinTableRow from '~/components/CoinTableRow.vue';
+import type { Coin } from '~/types/index.d.ts';
 
-// Usage with full reactivity and SSR support
-// const { data, status, error, refresh } = await useAPI('/coins');
-
-const { data, refresh } = await useFetch('http://127.0.0.1:8000/api/v1/coins');
-
-//   return useFetch(url, {
-//     ...options,
-//     $fetch: $api as typeof $fetch
-//   })
+//TODO: move this to a store and use it across the app
+//TODO: add error handling and loading state
+//TODO: add pagination and search functionality
+//TODO: add a refresh button to update the data
+//TODO: move api logic to composable
+const res = await useFetch('http://127.0.0.1:8000/api/v1/coins');
+const data = res.data as Ref<{ data: Coin[] }>;
 
 </script>
 
@@ -27,19 +27,20 @@ const { data, refresh } = await useFetch('http://127.0.0.1:8000/api/v1/coins');
 
             <section class="mt-10">
                 <h3 class="text-2xl font-bold mb-4">Top Cryptocurrencies</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-4 rounded shadow hover:shadow-lg">
-                        <h4 class="text-xl font-bold">Bitcoin</h4>
-                        <p class="text-gray-600">Price: $50,000</p>
-                    </div>
-                    <div class="bg-white p-4 rounded shadow hover:shadow-lg">
-                        <h4 class="text-xl font-bold">Ethereum</h4>
-                        <p class="text-gray-600">Price: $3,500</p>
-                    </div>
-                    <div class="bg-white p-4 rounded shadow hover:shadow-lg">
-                        <h4 class="text-xl font-bold">Cardano</h4>
-                        <p class="text-gray-600">Price: $2.30</p>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg shadow">
+                        <thead>
+                            <tr class="bg-blue-600 text-white *: text-sm font-medium uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left">Rank</th>
+                                <th class="px-6 py-3 text-left">Name</th>
+                                <th class="px-6 py-3 text-right">Price</th>
+                                <th class="px-6 py-3 text-right">24h Change %</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <CoinTableRow v-for="coin in data.data" :key="coin.id" :coin="coin" />
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>
