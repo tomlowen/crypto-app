@@ -32,7 +32,7 @@
     npm install
     ```
 
-7. run 
+7. Create a `.env` file in the root directory from `.env.example.`, then run
     ```bash
     npm run dev
     ```

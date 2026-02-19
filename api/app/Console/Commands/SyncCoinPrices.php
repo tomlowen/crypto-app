@@ -28,6 +28,14 @@ class SyncCoinPrices extends Command
     {
         $success = app(CoinService::class)->syncPrices();
 
-        return $success ? self::SUCCESS : self::FAILURE;
+        if (! $success) {
+            $this->error('Failed to sync coin prices.');
+            
+            return self::FAILURE;
+        } 
+        
+        $this->info('Coin prices synced successfully.');
+
+        return self::SUCCESS;
     }
 }
