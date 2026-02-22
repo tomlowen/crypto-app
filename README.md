@@ -37,3 +37,12 @@
     npm run dev
     ```
     and Open the application in your browser at `http://localhost:3000`.
+
+8. (Optional) To allow the regular syncing of data from the API, set up a Laravel queue worker using
+    ```bash
+    php artisan queue:work
+    ```
+    For local development you can simply update the prices manually using
+   ```bash
+    php artisan app:sync-coin-prices
+    ```
